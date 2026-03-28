@@ -12,6 +12,40 @@ body {
     margin: 0px;
 }
 
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
 .navbar {
     background: #121211;
     padding: 5px;
@@ -20,6 +54,7 @@ body {
     position: fixed;
     width: 100%;
     z-index: 100;
+    animation: fadeInDown 0.6s ease both;
 }
 
 .navdiv {
@@ -35,10 +70,12 @@ body {
     font-weight: 600;
     color: whitesmoke;
     white-space: nowrap;
+    transition: color 0.3s ease, letter-spacing 0.3s ease;
 }
 
 .progName a:hover {
-    transform: scale(1.05);
+    color: #a0a0a0;
+    letter-spacing: 1px;
 }
 
 .nav-menu {
@@ -57,10 +94,27 @@ li a {
     font-size: 18px;
     font-weight: bold;
     margin: 10px;
+    position: relative;
+    transition: color 0.3s ease;
+}
+
+li a::after {
+    content: '';
+    position: absolute;
+    bottom: -3px;
+    left: 0;
+    width: 0%;
+    height: 2px;
+    background: white;
+    transition: width 0.3s ease;
 }
 
 li a:hover {
     color: rgb(165, 165, 165);
+}
+
+li a:hover::after {
+    width: 100%;
 }
 
 .hamburger {
@@ -97,19 +151,26 @@ section {
     padding-top: 60px;
 }
 
+.home-content {
+    animation: fadeInUp 0.9s ease both;
+}
+
 #Home h1 {
     text-align: center;
     font-size: 80px;
+    animation: fadeInDown 0.8s ease both;
 }
 
 #Home h3 {
     font-size: 30px;
     font-weight: 100;
+    animation: fadeInUp 0.9s 0.2s ease both;
 }
 
 #Home p {
     color: #a0a0a0;
     font-weight: 50;
+    animation: fadeIn 1s 0.4s ease both;
 }
 
 #Profile {
@@ -174,20 +235,37 @@ section {
 #Skills span {
     margin-top: 5px;
     font-size: 30px;
+    transition: transform 0.2s ease, background-color 0.2s ease;
+    border-radius: 5px;
+    padding: 2px 6px;
+    cursor: default;
 }
 
 #Skills span:hover {
     background-color: #a0a0a0;
-    animation: forwards 2s infinite;
+    transform: scale(1.15);
 }
 
-#Profile span {
-    border: solid black 3px;
+.tag-group {
+    margin-top: 8px;
+}
+
+.tag-group span {
+    border: solid rgb(80, 80, 80) 3px;
     border-radius: 5px;
-    padding: 2px 8px;
+    padding: 2px 10px;
     display: inline-block;
     margin-left: 5px;
     margin-bottom: 5px;
+    color: #a0a0a0;
+    font-size: 18px;
+    transition: border-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
+}
+
+.tag-group span:hover {
+    border-color: #c0c0c0;
+    color: white;
+    transform: translateY(-2px);
 }
 
 #Projects {
@@ -199,6 +277,43 @@ section {
 
 #Projects .border {
     border-color: rgb(80, 80, 80);
+    transition: border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+#Projects .border:hover {
+    border-color: rgb(160, 160, 160);
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+}
+
+#Projects p {
+    color: #a0a0a0;
+    font-size: 18px;
+}
+
+#Certifications {
+    flex-direction: column;
+    gap: 20px;
+    min-height: 50vh;
+    padding: 80px 20px 40px;
+    background-color: rgb(80, 80, 80);
+}
+
+#Certifications .border {
+    border-color: rgb(40, 40, 40);
+    transition: border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+#Certifications .border:hover {
+    border-color: rgb(200, 200, 200);
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+}
+
+#Certifications p {
+    color: #a0a0a0;
+    font-size: 18px;
+    margin-top: 4px;
 }
 
 #Webinars {
@@ -206,20 +321,36 @@ section {
     gap: 10px;
     display: flex;
     min-height: 90vh;
-    background-color: rgb(80, 80, 80);
+    background-color: #1a1a19;
     padding: 80px 20px 40px;
 }
 
-.border {
-    display: block;
-    padding: 10px;
-    border: solid 2px black;
-    border-radius: 10px;
+#Webinars .border {
+    border-color: rgb(80, 80, 80);
+    transition: border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+#Webinars .border:hover {
+    border-color: rgb(160, 160, 160);
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
 }
 
 #Webinars p {
     color: #a0a0a0;
     font-size: 20px;
+}
+
+.border {
+    display: block;
+    padding: 14px 16px;
+    border: solid 2px black;
+    border-radius: 10px;
+}
+
+.spacing {
+    width: 80%;
+    margin-bottom: 20px;
 }
 
 #Contact {
@@ -241,6 +372,7 @@ section {
     justify-content: center;
     gap: 16px;
     flex-wrap: wrap;
+    margin-bottom: 16px;
 }
 
 #Socials a {
@@ -249,7 +381,14 @@ section {
     border: 3px solid rgb(80, 80, 80);
     border-radius: 10px;
     color: white;
-    padding: 5px;
+    padding: 6px 12px;
+    transition: border-color 0.3s ease, background-color 0.3s ease, transform 0.2s ease;
+}
+
+#Socials a:hover {
+    border-color: white;
+    background-color: rgba(255, 255, 255, 0.08);
+    transform: translateY(-3px);
 }
 
 label {
@@ -268,6 +407,11 @@ input {
     height: 20px;
     margin-top: 10px;
     outline: none;
+    transition: background 0.3s ease;
+}
+
+input:focus {
+    background: rgb(180, 180, 180);
 }
 
 .borderContact {
@@ -291,6 +435,11 @@ input {
     border-radius: 10px;
     outline: none;
     background: rgb(158, 158, 158);
+    transition: background 0.3s ease;
+}
+
+#Message:focus {
+    background: rgb(180, 180, 180);
 }
 
 button {
@@ -305,8 +454,28 @@ button {
     border: none;
     font-size: 20px;
     cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
 }
 
+button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.4);
+}
+
+button:active {
+    transform: translateY(0);
+}
+
+.reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
 
 @media (max-width: 768px) {
     .hamburger {
@@ -321,16 +490,15 @@ button {
     .nav-menu {
         position: fixed;
         left: -100%;
-        top: 45px;
-        gap: 0;
+        top: 72px;
         flex-direction: column;
         width: 100%;
         text-align: center;
-        transition: 0.3s;
-        background-color: black;
-        margin-right: 0;
+        transition: left 0.3s ease;
+        background-color: #121211;
+        border-bottom: rgb(209, 208, 208) solid 3px;
         z-index: 99;
-        margin-top: 27px;
+        margin-right: 0;
     }
 
     .nav-menu li {
@@ -382,6 +550,10 @@ button {
     }
 
     #Projects {
+        padding: 80px 16px 40px;
+    }
+
+    #Certifications {
         padding: 80px 16px 40px;
     }
 
