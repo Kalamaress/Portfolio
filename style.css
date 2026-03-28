@@ -110,7 +110,7 @@ li a::after {
 }
 
 li a:hover {
-    color: rgb(165, 165, 165);
+    background: #1a1a19;
 }
 
 li a:hover::after {
@@ -497,7 +497,7 @@ button:active {
         text-align: center;
         transition: left 0.3s ease;
         background-color: #121211;
-        border-bottom: rgb(209, 208, 208) solid 3px;
+        background: #121211 solid 3px;
         z-index: 99;
         margin-right: 0;
     }
