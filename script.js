@@ -1,31 +1,48 @@
-const hamburger = document.querySelector('.hamburger');
+﻿const menuToggle = document.querySelector('.menu-toggle');
 const navMenu = document.querySelector('.nav-menu');
-
-hamburger.addEventListener('click', () => {
-    navMenu.classList.toggle('active');
+function closeMenu() {
+  navMenu.classList.remove('open');
+  menuToggle.setAttribute('aria-expanded', 'false');
+}
+menuToggle.addEventListener('click', () => {
+  const open = navMenu.classList.toggle('open');
+  menuToggle.setAttribute('aria-expanded', String(open));
 });
-
-document.querySelectorAll('.nav-menu a').forEach(link => {
-    link.addEventListener('click', () => {
-        navMenu.classList.remove('active');
-    });
+navMenu.querySelectorAll('a').forEach(link => link.addEventListener('click', closeMenu));
+document.addEventListener('click', event => {
+  if (!event.target.closest('.navigation')) closeMenu();
 });
-
-const revealElements = document.querySelectorAll(
-    '#Projects .spacing, #Certifications .spacing, #Webinars .spacing, #Contact .borderContact, #Profile'
-);
-
-revealElements.forEach(el => el.classList.add('reveal'));
-
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            setTimeout(() => {
-                entry.target.classList.add('visible');
-            }, 100);
-            observer.unobserve(entry.target);
-        }
-    });
-}, { threshold: 0.15 });
-
-revealElements.forEach(el => observer.observe(el));
+document.addEventListener('keydown', event => {
+  if (event.key === 'Escape' && navMenu.classList.contains('open')) {
+    closeMenu();
+    menuToggle.focus();
+  }
+});
+window.matchMedia('(min-width: 761px)').addEventListener('change', closeMenu);
+document.querySelector('#year').textContent = new Date().getFullYear();
+const dialog = document.querySelector('.certificate-dialog');
+const dialogImage = dialog.querySelector('.dialog-image');
+let certificateTrigger;
+document.querySelectorAll('[data-certificate]').forEach(link => {
+  link.addEventListener('click', event => {
+    if (typeof dialog.showModal !== 'function') return;
+    event.preventDefault();
+    certificateTrigger = link;
+    const image = link.querySelector('img');
+    dialogImage.src = link.href;
+    dialogImage.alt = image.alt;
+    dialog.querySelector('#certificate-title').textContent = link.closest('article').querySelector('h3').textContent;
+    dialog.querySelector('.original-link').href = link.href;
+    dialog.showModal();
+    document.body.classList.add('modal-open');
+  });
+});
+dialog.querySelector('.dialog-close').addEventListener('click', () => dialog.close());
+dialog.addEventListener('click', event => {
+  const bounds = dialog.getBoundingClientRect();
+  if (event.target === dialog && (event.clientX < bounds.left || event.clientX > bounds.right || event.clientY < bounds.top || event.clientY > bounds.bottom)) dialog.close();
+});
+dialog.addEventListener('close', () => {
+  document.body.classList.remove('modal-open');
+  certificateTrigger?.focus();
+});
