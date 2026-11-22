@@ -1025,7 +1025,3 @@ body.modal-open{
     }
 }
 
-/* Keep gallery previews monochrome; the viewer shows the original document. */
-.certificate-image img {
-    filter: grayscale(1);
-}
