@@ -38,11 +38,18 @@
         <div class="art-bottomline"><span>Always curious.</span><span>Always creating.</span></div>
       </div>
     </section>
-    <div class="stack-strip"><div class="container"><span>MY TOOLKIT</span><p>HTML &amp; CSS <b>✳</b> JavaScript <b>✳</b> C# <b>✳</b> Java <b>✳</b> MS SQL <b>✳</b> Figma</p></div></div>
     <section class="section container about" id="Profile">
       <div><p class="eyebrow">THE PERSON BEHIND THE CODE</p><h2>A curious mind.<br>A builder at heart.</h2></div>
       <div class="about-details"><p class="lead">Hi, I’m David, an Information Technology student at STI College Malolos. I’m interested in how interface design and software development work together.</p><p>I like starting with a task someone needs to finish, whether that’s booking a room or updating a student record. That task shapes what I put on the screen and how I build the software behind it.</p>
-      <div class="skills"><div><h3>Languages &amp; technologies</h3><p>HTML · CSS · JavaScript · C# · Java · MS SQL · ERP</p></div><div><h3>Tools I work with</h3><p>Visual Studio Code · NetBeans · MS Server · Figma</p></div></div></div>
+      </div>
+      <section class="profile-stack" aria-labelledby="stack-title">
+        <h3 id="stack-title">My tech stack</h3>
+        <div class="stack-groups">
+          <div><h4>Design &amp; front end</h4><ul><li>Figma</li><li>HTML</li><li>CSS</li><li>JavaScript</li></ul></div>
+          <div><h4>Software &amp; data</h4><ul><li>C#</li><li>Java</li><li>MS SQL</li><li>ERP</li></ul></div>
+          <div><h4>Development tools</h4><ul><li>Visual Studio Code</li><li>NetBeans</li><li>MS Server</li><li>Claude</li><li>Codex</li></ul></div>
+        </div>
+      </section>
     </section>
     <section class="section container" id="Projects">
       <div class="section-heading"><div><p class="eyebrow">SELECTED WORK</p><h2>Things I’ve built.</h2></div><p>Exploring ideas. Solving everyday problems.</p></div>
@@ -89,5 +96,13 @@
   </main>
   <footer class="footer"><nav aria-label="Social links"><a href="https://github.com/Kalamaress">GitHub</a><a href="https://www.linkedin.com/in/david-sarzona/">LinkedIn</a><a href="https://www.facebook.com/john.david.sarzona.2025">Facebook</a></nav><p>© Copyright <span id="year">2026</span> by John David Sarzona</p></footer>
   <dialog class="certificate-dialog" aria-labelledby="certificate-title"><div class="dialog-toolbar"><h2 id="certificate-title">Certificate</h2><button class="dialog-close" type="button" aria-label="Close preview" autofocus><span aria-hidden="true">×</span></button></div><div class="preview-content"></div></dialog>
+  <svg width="0" height="0" aria-hidden="true" focusable="false" style="position:absolute">
+    <defs>
+      <filter id="water-refraction" x="0%" y="0%" width="100%" height="100%" color-interpolation-filters="sRGB">
+        <feTurbulence type="fractalNoise" baseFrequency=".018 .042" numOctaves="1" seed="4" result="surface"/>
+        <feDisplacementMap in="SourceGraphic" in2="surface" scale="10" xChannelSelector="R" yChannelSelector="G"/>
+      </filter>
+    </defs>
+  </svg>
 </body>
 </html>

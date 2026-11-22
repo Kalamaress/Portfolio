@@ -4,24 +4,22 @@ const stops = [...document.querySelectorAll('main > section[id]')];
 const destinations = document.querySelectorAll('.navigation a[href^="#"]');
 let waveFrame = 0;
 const slideProgress = new Map();
-const cursorPulse = document.createElement('span');
-cursorPulse.className = 'cursor-pulse';
-cursorPulse.setAttribute('aria-hidden', 'true');
-cursorPulse.hidden = true;
-function hidePulse() { cursorPulse.hidden = true; }
-document.addEventListener('pointermove', event => {
-  const target = event.target.closest('a[href], button:enabled');
-  if (!target || event.pointerType !== 'mouse') return hidePulse();
-  const host = target.closest('dialog') || document.body;
-  if (cursorPulse.parentNode !== host) host.append(cursorPulse);
-  cursorPulse.style.left = event.clientX + 'px';
-  cursorPulse.style.top = event.clientY + 'px';
-  cursorPulse.hidden = false;
-});
-document.addEventListener('pointerout', hidePulse);
-document.addEventListener('scroll', hidePulse, true);
-document.addEventListener('click', hidePulse);
-window.addEventListener('blur', hidePulse);
+const rippleMotion = matchMedia('(prefers-reduced-motion:no-preference) and (forced-colors:none)');
+let lastRipple = -Infinity;
+function releaseRipple(event) {
+  if (!rippleMotion.matches || !event.isPrimary) return;
+  if (event.type === 'pointermove' && (event.pointerType === 'touch' || event.timeStamp - lastRipple < 160)) return;
+  lastRipple = event.timeStamp;
+  const ripple = document.createElement('span');
+  ripple.className = 'water-ring';
+  ripple.setAttribute('aria-hidden', 'true');
+  ripple.style.left = event.clientX + 'px';
+  ripple.style.top = event.clientY + 'px';
+  (event.target.closest('dialog') || document.body).append(ripple);
+  window.setTimeout(() => ripple.remove(), 1000);
+}
+document.addEventListener('pointermove', releaseRipple, { passive:true });
+document.addEventListener('pointerdown', releaseRipple, { passive:true });
 const tideMotion = matchMedia('(prefers-reduced-motion: no-preference)');
 let lastScroll = scrollY;
 let tideFrame = 0;
